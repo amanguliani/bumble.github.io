@@ -93,6 +93,56 @@
             cursor: grabbing;
             transition: none;
         }
+        
+        /* Match Card Style */
+        .card.match-style {
+            background-color: #f6e05e;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .match-avatars { display: flex; position: relative; margin-top: 2rem; margin-bottom: 1rem; }
+        .match-avatar { 
+            width: 120px; /* Increased size */
+            height: 120px; /* Increased size */
+            border-radius: 9999px; 
+            border: 4px solid white; 
+            object-fit: cover; 
+        }
+        .match-avatar:first-child { transform: rotate(-15deg); }
+        .match-avatar:last-child { transform: rotate(15deg); margin-left: -30px; }
+        
+        /* Match card animations */
+        .match-title, .match-avatars, .match-subtitle {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .match-avatars { animation-delay: 0.2s; }
+        .match-subtitle { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .heart-particle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp 2.5s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-150px) scale(0.5); opacity: 0; }
+        }
+
+        .heart-1 { top: 80%; left: 15%; animation-delay: 0s; }
+        .heart-2 { top: 90%; left: 80%; animation-delay: 0.8s; }
+        .heart-3 { top: 85%; left: 10%; animation-delay: 1.5s; }
+        .heart-4 { top: 95%; left: 90%; animation-delay: 2s; }
 
         /* Infographic Card Style */
         .card.infographic-style {
@@ -108,6 +158,10 @@
             padding: 1.25rem;
             flex-grow: 1;
             overflow-y: auto;
+            .text-sm {
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+            }
         }
 
         /* Profile Card Style */
@@ -251,6 +305,15 @@
     <script>
         const presentationData = [
             {
+                type: 'profile',
+                name: "Professor, Dumais",
+                hobbies: ["M&A", "Teaching", "Corporate Strategy"],
+                image: "./michael-dumais.jpg",
+            },
+            {
+                type: 'match'
+            },
+            {
                 type: 'infographic',
                 title: "From Trailblazer to Crossroads",
                 image: "https://placehold.co/600x400/f6e05e/4a4a4a?text=Introduction",
@@ -293,12 +356,6 @@
                 `
             },
             {
-                type: 'profile',
-                name: "Michael, Ageless",
-                hobbies: ["M&A", "Teaching", "Corporate Strategy"],
-                image: "./michael-dumais.jpg",
-            },
-            {
                 type: 'infographic',
                 title: "Bumble's Corporate Crossroads",
                 image: "https://placehold.co/600x400/c4b5fd/4a4a4a?text=Challenges",
@@ -332,7 +389,7 @@
             },
             {
                 type: 'profile',
-                name: "Fritz",
+                name: "Fritz, Ageless",
                 hobbies: ["Langone", "Ted talks", "A25"],
                 image: "fritz-francois.jpg"
             },
@@ -478,7 +535,21 @@
                         </div>
                     </div>
                 `;
-            } else { // Infographic style
+            } else if (data.type === 'match')   {
+                card.className = 'card match-style';
+                card.innerHTML = `
+                    <div class="heart-particle heart-1">❤️</div>
+                    <div class="heart-particle heart-2">💛</div>
+                    <div class="heart-particle heart-3">🧡</div>
+                    <div class="heart-particle heart-4">❤️</div>
+                    <h1 class="text-4xl font-bold text-gray-800 match-title">YOU MATCHED!</h1>
+                    <div class="match-avatars">
+                        <img src="./michael-dumais.jpg" class="match-avatar">
+                        <img src="./PD_is_king.png" class="match-avatar">
+                    </div>
+                    <p class="text-gray-700 match-subtitle">You're ready for the next step.</p>
+                `;
+                } else { // Infographic style
                 card.className = 'card infographic-style';
                 card.innerHTML = `
                     <img src="${data.image}" class="card-image" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
