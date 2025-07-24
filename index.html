@@ -305,6 +305,54 @@
     <script>
         const presentationData = [
             {
+                type: 'title',
+                title: "Unlocking Growth at Bumble",
+                subtitle: "A Strategic Overview",
+                image: "./bumble.png",
+            },
+            {
+                type: 'profile',
+                name: "Meg",
+                hobbies: ["Comedy", "Culture", "Creativity"],
+                image: "./meg.jpeg",
+            },
+            {
+                type: 'profile',
+                name: "Illnaz",
+                hobbies: ["Vibe-savvy", "jet-setter", "wellness-chic"],
+                image: "./illnaz.jpeg",
+            },
+            {
+                type: 'profile',
+                name: "Sarah",
+                hobbies: [""],
+                image: "",
+            },
+            {
+                type: 'profile',
+                name: "Latrelle",
+                hobbies: [""],
+                image: "",
+            },
+            {
+                type: 'profile',
+                name: "Charlie",
+                hobbies: [""],
+                image: "",
+            },
+            {
+                type: 'profile',
+                name: "Zhen",
+                hobbies: [""],
+                image: "",
+            },
+            {
+                type: 'profile',
+                name: "Aman",
+                hobbies: ["Builder", "Engineer", "DAD"],
+                image: "./Aman.jpeg",
+            },
+            {
                 type: 'profile',
                 name: "Professor, Dumais",
                 hobbies: ["M&A", "Teaching", "Corporate Strategy"],
@@ -401,11 +449,11 @@
                     <div class="swot-grid">
                         <div class="swot-item">
                             <svg class="icon text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                            <div><h4 class="swot-title text-green-600">Strength</h4><p class="text-sm">Our "women-first" approach truly sets us apart.</p></div>
+                            <div><h4 class="swot-title text-green-600">Strength</h4><p class="text-sm">"Women-first" approach truly sets them apart.</p></div>
                         </div>
                         <div class="swot-item">
                             <svg class="icon text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" /></svg>
-                            <div><h4 class="swot-title text-red-600">Weakness</h4><p class="text-sm">We're working to diversify beyond dating revenue.</p></div>
+                            <div><h4 class="swot-title text-red-600">Weakness</h4><p class="text-sm">Working to diversify beyond dating revenue.</p></div>
                         </div>
                         <div class="swot-item">
                             <svg class="icon text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
@@ -413,7 +461,7 @@
                         </div>
                          <div class="swot-item">
                             <svg class="icon text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                            <div><h4 class="swot-title text-yellow-600">Threat</h4><p class="text-sm">We navigate a highly competitive market and evolving regulations.</p></div>
+                            <div><h4 class="swot-title text-yellow-600">Threat</h4><p class="text-sm">Navigate a highly competitive market and evolving regulations.</p></div>
                         </div>
                     </div>
                 `
@@ -523,7 +571,18 @@
         function createCard(data, index) {
             const card = document.createElement('div');
             
-            if (data.type === 'profile') {
+            if (data.type === 'title') {
+                card.className = 'card profile-style';
+                card.style.backgroundImage = `url(${data.image})`;
+                card.innerHTML = `
+                    <div class="card-info">
+                        <div>
+                            <h2>${data.title}</h2>
+                            <p>${data.subtitle || ''}</p>
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'profile') {
                 card.className = 'card profile-style';
                 card.style.backgroundImage = `url(${data.image})`;
                 const hobbiesHtml = data.hobbies.map(hobby => `<div class="hobby-pill">${hobby}</div>`).join('');
